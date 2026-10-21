@@ -1,0 +1,32 @@
+<svg viewBox="0 0 460 340" role="img" aria-label="Bestuurder met een lekke band belt Sleepdienst Janssen">
+          <g fill="#9cc8f2"><ellipse cx="70" cy="60" rx="40" ry="18"/><ellipse cx="100" cy="48" rx="30" ry="20"/><ellipse cx="380" cy="80" rx="34" ry="14"/></g>
+          <path d="M20 292 H440" stroke="#0b2a5b" stroke-width="3" stroke-linecap="round"/>
+          <!-- auto -->
+          <path d="M190 270 L192 216 Q194 200 212 196 L262 188 L300 152 Q308 146 322 146 L400 146 Q414 146 422 158 L440 190 L440 270Z" fill="#fff" stroke="#0b2a5b" stroke-width="3"/>
+          <path d="M306 160 Q312 156 322 156 L358 156 L358 188 L276 188Z" fill="#cfe6fb" stroke="#0b2a5b" stroke-width="2.5"/>
+          <path d="M366 156 L398 156 Q408 156 414 166 L428 188 L366 188Z" fill="#cfe6fb" stroke="#0b2a5b" stroke-width="2.5"/>
+          <rect x="196" y="224" width="40" height="12" rx="4" fill="#1e88e5"/>
+          <path d="M196 248 H250" stroke="#0b2a5b" stroke-width="2.5"/>
+          <circle cx="250" cy="272" r="24" fill="#0b2a5b"/><circle cx="250" cy="272" r="10" fill="#9fb3c8"/>
+          <circle cx="400" cy="272" r="24" fill="#0b2a5b"/><circle cx="400" cy="272" r="10" fill="#9fb3c8"/>
+          <!-- krik -->
+          <path d="M236 290 L260 262 L282 290" fill="none" stroke="#e53935" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M282 290 L300 250" stroke="#e53935" stroke-width="4" stroke-linecap="round"/>
+          <!-- lekke band -->
+          <ellipse cx="178" cy="282" rx="38" ry="12" fill="#1e5aa8"/><ellipse cx="178" cy="276" rx="38" ry="12" fill="#2f75c9"/><ellipse cx="178" cy="276" rx="14" ry="4" fill="#cfe6fb"/>
+          <!-- gevarendriehoek -->
+          <path d="M330 30 L356 74 L304 74Z" fill="none" stroke="#e53935" stroke-width="7" stroke-linejoin="round"/>
+          <!-- persoon -->
+          <circle cx="84" cy="142" r="20" fill="#f2c9a5"/>
+          <path d="M66 136 Q70 112 96 116 Q108 120 104 134 Q92 126 66 136Z" fill="#0b2a5b"/>
+          <path d="M60 168 Q84 156 106 168 L116 228 L58 228Z" fill="#1e88e5"/>
+          <path d="M98 172 Q112 160 104 146" stroke="#1e88e5" stroke-width="12" stroke-linecap="round" fill="none"/>
+          <rect x="96" y="134" width="10" height="18" rx="3" fill="#0b2a5b"/>
+          <path d="M60 226 L54 290 M112 226 L132 262 L118 290" stroke="#0b2a5b" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M44 292 h22 M110 292 h20" stroke="#0b2a5b" stroke-width="8" stroke-linecap="round"/>
+          <!-- spreekballon -->
+          <g transform="translate(118 72)">
+            <path d="M0 10 Q0 0 10 0 H92 Q102 0 102 10 V50 Q102 60 92 60 H30 L14 76 L18 60 H10 Q0 60 0 50Z" fill="#fff" stroke="#0b2a5b" stroke-width="2.5"/>
+            <use href="#i-truck" x="20" y="10" width="62" height="42" color="#1e88e5"/>
+          </g>
+        </svg>
