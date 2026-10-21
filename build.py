@@ -164,7 +164,10 @@ def page(*, title, desc, path, body, schema, crumbs=None):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icon-180.png">
+<link rel="manifest" href="/assets/site.webmanifest">
 <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>
 </head>
 <body>
@@ -551,6 +554,10 @@ def main():
     write("assets/style.css", (SRC / "style.css").read_text())
     write("assets/site.js", (SRC / "site.js").read_text())
     write("assets/favicon.svg", (SRC / "favicon.svg").read_text())
+    write("assets/site.webmanifest", (SRC / "site.webmanifest").read_text())
+    for f in ["favicon.ico", "icon-180.png", "icon-192.png", "icon-512.png"]:
+        dest = ROOT / ("favicon.ico" if f == "favicon.ico" else f"assets/{f}")
+        dest.write_bytes((SRC / f).read_bytes())
     write("index.html", home())
     for c in CITIES:
         write(f"sleepdienst-{c['slug']}/index.html", city_page(c))
