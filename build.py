@@ -213,7 +213,7 @@ def page(*, title, desc, path, body, schema, crumbs=None):
         <p>Sleepdienst, pechhulp en autotransport in {REGION}. 24 uur per dag, 7 dagen per week.</p>
       </div>
       <div><h4>Werkgebied</h4><ul>{city_links}</ul></div>
-      <div><h4>Diensten</h4><ul><li><a href="/#diensten">Pechhulp</a></li><li><a href="/#diensten">Auto slepen</a></li><li><a href="/#diensten">Autotransport</a></li><li><a href="/#diensten">Bandenservice</a></li><li><a href="/#faq">Veelgestelde vragen</a></li><li><a href="/pech-op-de-snelweg/">Pech op de snelweg</a></li></ul></div>
+      <div><h4>Diensten</h4><ul><li><a href="/#diensten">Pechhulp</a></li><li><a href="/#diensten">Auto slepen</a></li><li><a href="/#diensten">Autotransport</a></li><li><a href="/#diensten">Bandenservice</a></li><li><a href="/#faq">Veelgestelde vragen</a></li><li><a href="/pech-op-de-snelweg/">Pech op de snelweg</a></li><li><a href="/elektrische-auto-slepen/">Elektrische auto slepen</a></li></ul></div>
       <div><h4>Contact</h4><ul>
         <li>Tel: <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a> (24/7)</li>
         <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
@@ -468,7 +468,7 @@ def city_page(c):
         <li>Auto slepen na pech of een ongeval</li>
         <li>Pechhulp ter plaatse: starthulp, lege accu, band wisselen</li>
         <li>Autotransport naar garage, huis of demontagebedrijf</li>
-        <li>Transport van elektrische auto's op een plateauwagen</li>
+        <li><span><a href="/elektrische-auto-slepen/">Transport van elektrische auto's</a> op een plateauwagen</span></li>
       </ul>
     </article>
     <aside class="side">
@@ -595,7 +595,7 @@ def guide_snelweg():
       <p>Blokkeert uw auto een rijstrook of is er een ongeval gebeurd, dan kan de weginspecteur van Rijkswaterstaat of de politie een berger inschakelen. Het doel is de weg zo snel mogelijk vrij te maken. In dat geval wordt uw auto eerst naar een veilige plek gebracht. Daarna kunnen wij het voertuig ophalen en verder vervoeren naar uw garage of huis.</p>
 
       <h2>Na de pech: uw auto ophalen en wegbrengen</h2>
-      <p>Wij werken in {REGION}: {city_links}. Staat uw auto na een berging op een terrein, of wilt u hem van de vluchtstrook naar uw eigen garage laten brengen? Bel ons, dan regelen we het vervoer op een plateauwagen – ook voor elektrische auto's.</p>
+      <p>Wij werken in {REGION}: {city_links}. Staat uw auto na een berging op een terrein, of wilt u hem van de vluchtstrook naar uw eigen garage laten brengen? Bel ons, dan regelen we het vervoer op een plateauwagen – ook voor <a href="/elektrische-auto-slepen/">elektrische auto's</a>.</p>
     </article>
     <aside class="side">
       <div class="side-card">
@@ -638,6 +638,127 @@ def guide_snelweg():
     return page(title=f"Pech op de snelweg? Wat te doen en wie bellen | {NAME}",
                 desc=f"Pech op de snelweg? Zo blijft u veilig: alarmlichten, hesje, achter de vangrail. Wie u belt en hoe u hulp krijgt zonder lidmaatschap. 24/7: {PHONE_DISPLAY}.",
                 path=path, body=body, schema=schema, crumbs=["Pech op de snelweg"])
+
+
+EV_FAQ = [
+    ("Kan je een elektrische auto slepen?", "Ja, maar niet aan een sleepkabel of sleepstang. Een elektrische auto kan veilig vervoerd worden op een plateauwagen, of bij sommige modellen met de aangedreven wielen van de grond. Zo draait de elektromotor niet mee en ontstaat er geen schade."),
+    ("Mag je een elektrische auto slepen?", "Met een sleepkabel of sleepstang: bij de meeste elektrische auto's niet. Als de aangedreven wielen draaien, draait ook de elektromotor mee en wekt hij stroom op. Dat kan de motor, de omvormer of de accu beschadigen. Laat een elektrische auto daarom vervoeren op een plateauwagen, of met de aangedreven wielen van de grond."),
+    ("Kan ik met een lege accu naar een laadpaal geduwd of gesleept worden?", "Een paar meter rollen in de neutraalstand of transportmodus is bij veel modellen geen probleem, bijvoorbeeld om de auto van de weg af te krijgen. Voor een echte rit naar een laadpunt laat u de auto op een plateauwagen zetten. Wij brengen u naar de dichtstbijzijnde snellader, naar huis of naar de garage."),
+    ("Mijn elektrische auto start niet, maar de grote accu is vol. Wat nu?", "Vaak is de 12-voltaccu leeg. Die voedt de elektronica, de sloten en het systeem dat de auto opstart. Met starthulp op de 12-voltaccu is het probleem vaak meteen opgelost. Kijk in de handleiding waar de startpunten zitten."),
+    ("Wat moet ik doen na een ongeluk met een elektrische auto?", "Zet de auto uit als dat veilig kan, stap uit en blijf op afstand. Raak oranje kabels en beschadigde onderdelen niet aan. Ruikt u iets vreemds, ziet u rook of hoort u gesis of geknetter, bel dan 112. Meld altijd dat het om een elektrische auto gaat."),
+    ("Wat kost het slepen van een elektrische auto?", "Dat hangt af van de afstand, de plek en het tijdstip. Bij " + NAME + " hoort u de prijs vooraf, voordat er een wagen naar u toe rijdt."),
+    ("Slepen jullie ook Tesla, Polestar, Kia en andere merken?", "Ja. We vervoeren alle merken elektrische auto's op een plateauwagen. Geef het merk en model door als u belt, dan nemen we de juiste spullen mee."),
+]
+
+
+def guide_ev():
+    path = "/elektrische-auto-slepen/"
+    body = f"""<section class="hero hero-city">
+  <div class="container hero-grid">
+    <div>
+      <h1>Mag je een <span>elektrische auto</span> slepen?</h1>
+      <p>Kort antwoord: met een sleepkabel meestal niet. Een elektrische auto hoort op een plateauwagen. In deze gids leest u waarom, wat u moet doen bij pech of een lege accu, en hoe {NAME} uw auto veilig vervoert.</p>
+      <div class="actions">
+        <a class="btn btn-yellow" href="tel:{PHONE_TEL}"><svg class="ico"><use href="#i-phone"/></svg>Elektrische auto stil? Bel {PHONE_DISPLAY}</a>
+        <a class="btn btn-navy" href="#waarom">Waarom niet slepen?</a>
+      </div>
+      <div class="trust">
+        <span><svg><use href="#i-clock"/></svg>24/7 bereikbaar</span>
+        <span><svg><use href="#i-euro"/></svg>Vooraf duidelijke prijs</span>
+      </div>
+    </div>
+    <div class="hero-art">{svg("art-truck")}</div>
+  </div>
+  <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70 C 240 130, 480 10, 760 50 S 1220 120, 1440 30 L1440 120 L0 120Z" fill="#fff"/></svg>
+</section>
+<section class="section city-body">
+  <div class="container city-grid">
+    <article class="prose">
+      <h2>Kan je een elektrische auto slepen?</h2>
+      <p>Ja, een elektrische auto kan gesleept worden – maar niet zoals een gewone auto. Aan een sleepkabel of sleepstang achter een andere auto mag het bij de meeste modellen niet. De veilige manier is vervoer op een plateauwagen, waarbij de wielen stilstaan.</p>
+
+      <h2 id="waarom">Waarom u een elektrische auto niet aan een kabel sleept</h2>
+      <p>Bij een auto met een gewone motor kunt u de versnellingsbak in z'n vrij zetten. Bij een elektrische auto zit de elektromotor vast verbonden met de wielen. Draaien de aangedreven wielen, dan draait de motor mee en wekt hij stroom op – ook als de auto uit staat.</p>
+      <p>Dat geeft risico op:</p>
+      <ul class="checks">
+        <li><span><b>Schade aan de elektromotor of omvormer</b> door stroom die nergens heen kan.</span></li>
+        <li><span><b>Oververhitting</b> van onderdelen die tijdens het slepen niet gekoeld worden.</span></li>
+        <li><span><b>Garantieproblemen</b>: veel fabrikanten schrijven in de handleiding voor dat de auto alleen op een plateauwagen vervoerd mag worden.</span></li>
+      </ul>
+      <p>Heeft uw auto vierwielaandrijving, dan zijn alle wielen met een motor verbonden. Dan helpt het niet om alleen de voor- of achterkant op te tillen.</p>
+
+      <h2>Wat mag wel?</h2>
+      <ul class="checks">
+        <li><span><b>Vervoer op een plateauwagen.</b> De auto staat dan volledig stil op de wagen. Dit is de veiligste manier en wat de meeste fabrikanten adviseren.</span></li>
+        <li><span><b>Aangedreven wielen van de grond</b>, bijvoorbeeld met rolbokken (dollies). Alleen als de handleiding dat toestaat.</span></li>
+        <li><span><b>Een paar meter rollen</b> in de transport- of sleepmodus, bijvoorbeeld om de auto op de plateauwagen te trekken of van de rijbaan af te halen. Niet voor een rit over de weg.</span></li>
+      </ul>
+      <p>Twijfelt u? Kijk in de handleiding onder 'slepen' of 'transport'. Of bel ons: wij kennen de meeste modellen.</p>
+
+      <h2>Accu leeg onderweg: wat nu?</h2>
+      <p>Bij een lege tank haalt u een jerrycan. Bij een lege accu kan dat niet. Dit kunt u doen:</p>
+      <ul class="checks">
+        <li><span><b>Zet de auto veilig neer</b>, het liefst nog voordat de accu helemaal leeg is. De meeste auto's waarschuwen ruim op tijd en rijden nog een stukje in een spaarstand.</span></li>
+        <li><span><b>Laat de auto naar een laadpunt brengen.</b> Wij zetten uw auto op de plateauwagen en brengen hem naar de dichtstbijzijnde snellader, naar huis of naar de garage.</span></li>
+        <li><span><b>Staat u op de snelweg?</b> Volg dan eerst de stappen in onze gids <a href="/pech-op-de-snelweg/">pech op de snelweg</a>.</span></li>
+      </ul>
+
+      <h2>Auto start niet maar de accu is vol? Check de 12-voltaccu</h2>
+      <p>Elke elektrische auto heeft naast de grote accu ook een gewone 12-voltaccu. Die zorgt voor de sloten, het scherm en het opstarten van het systeem. Is die leeg, dan reageert de auto nergens op – ook al staat de grote accu vol. Met starthulp is dat vaak in een paar minuten verholpen. Dat kunnen wij ter plaatse doen.</p>
+
+      <h2>Na een ongeluk met een elektrische auto</h2>
+      <p>Een beschadigde accu kan ook na het ongeluk nog warm worden. Daarom:</p>
+      <ul class="checks">
+        <li><span><b>Zet de auto uit</b> en ga met iedereen op afstand staan, achter de vangrail als u op de snelweg staat.</span></li>
+        <li><span><b>Raak oranje kabels en beschadigde onderdelen niet aan.</b></span></li>
+        <li><span><b>Bel 112</b> bij rook, gesis, geknetter of een vreemde geur.</span></li>
+        <li><span><b>Meld dat het om een elektrische auto gaat</b>, aan de hulpdiensten én aan de sleepdienst.</span></li>
+      </ul>
+
+      <h2>Zo vervoert {NAME} uw elektrische auto</h2>
+      <p>Wij vervoeren elektrische auto's altijd op een plateauwagen, zonder dat de wielen over de weg draaien. Als de auto zelf niet meer rijdt, trekken we hem met een lier op de wagen in de transportmodus. Daarna brengen we hem waar u wilt: naar een laadpunt, naar huis, naar uw dealer of naar een schadeherstelbedrijf.</p>
+      <p>We werken in {REGION}. Bel ons en geef het merk, het model en uw locatie door. U hoort direct wanneer we er zijn en wat het kost.</p>
+    </article>
+    <aside class="side">
+      <div class="side-card">
+        <h3>Elektrische auto stil?</h3>
+        <p>Wij vervoeren elke EV op een plateauwagen. 24/7.</p>
+        <a class="btn btn-yellow" href="tel:{PHONE_TEL}"><svg class="ico"><use href="#i-phone"/></svg>{PHONE_DISPLAY}</a>
+      </div>
+      <div class="side-card">
+        <h3>In het kort</h3>
+        <ul class="checks">
+          <li>Niet slepen aan een kabel</li>
+          <li>Vervoer op een plateauwagen</li>
+          <li>Start niet? Check de 12-voltaccu</li>
+          <li>Na een ongeluk: afstand houden</li>
+        </ul>
+      </div>
+      <div class="side-card">
+        <h3>Lees ook</h3>
+        <p><a href="/pech-op-de-snelweg/">Pech op de snelweg: wat moet u doen?</a></p>
+      </div>
+    </aside>
+  </div>
+</section>
+<section class="section" id="faq">
+  <div class="container">
+    <h2 class="title center">Vragen over het slepen van een elektrische auto</h2>
+    <div class="faq narrow">{faq_html(EV_FAQ)}</div>
+  </div>
+</section>"""
+    schema = {"@context": "https://schema.org", "@graph": [
+        {"@type": "Article", "headline": "Mag je een elektrische auto slepen?", "inLanguage": "nl-NL",
+         "author": {"@type": "Organization", "name": NAME}, "publisher": {"@id": SITE + "/#business"},
+         "mainEntityOfPage": SITE + path, "dateModified": date.today().isoformat()},
+        faq_schema(EV_FAQ),
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE + "/"},
+            {"@type": "ListItem", "position": 2, "name": "Elektrische auto slepen", "item": SITE + path}]},
+    ]}
+    return page(title=f"Mag je een elektrische auto slepen? Zo doet u het veilig | {NAME}",
+                desc=f"Een elektrische auto slepen aan een kabel kan schade geven. Lees waarom, wat wel mag en wat u doet bij een lege accu. Wij vervoeren uw EV 24/7 op een plateauwagen: {PHONE_DISPLAY}.",
+                path=path, body=body, schema=schema, crumbs=["Elektrische auto slepen"])
 
 
 def privacy():
@@ -690,11 +811,12 @@ def main():
     for c in CITIES:
         write(f"sleepdienst-{c['slug']}/index.html", city_page(c))
     write("pech-op-de-snelweg/index.html", guide_snelweg())
+    write("elektrische-auto-slepen/index.html", guide_ev())
     write("privacy/index.html", privacy())
     for old, new in REDIRECTS.items():
         write(f"{old}/index.html", redirect(new))
     today = date.today().isoformat()
-    urls = ["/"] + [url(c["slug"]) for c in CITIES] + ["/pech-op-de-snelweg/", "/privacy/"]
+    urls = ["/"] + [url(c["slug"]) for c in CITIES] + ["/pech-op-de-snelweg/", "/elektrische-auto-slepen/", "/privacy/"]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
           + "".join(f"  <url><loc>{SITE}{u}</loc><lastmod>{today}</lastmod></url>\n" for u in urls) + "</urlset>\n")
     write("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n")
