@@ -1,0 +1,16 @@
+<svg viewBox="0 0 420 260" role="img" aria-label="Sleepwagen onderweg naar een klant">
+      <path d="M40 40 Q200 -20 380 40 Q440 140 360 220 Q200 280 60 220 Q-20 140 40 40Z" fill="#fff" opacity=".14"/>
+      <path d="M30 210 H400" stroke="#fff" stroke-width="3" stroke-dasharray="22 14" opacity=".6"/>
+      <g transform="translate(70 70)">
+        <rect x="0" y="40" width="110" height="80" rx="10" fill="#fff"/>
+        <path d="M110 60 h50 l36 36 v24 H110Z" fill="#fff"/>
+        <path d="M118 68 h38 l26 26 h-64Z" fill="#cfe6fb"/>
+        <rect x="0" y="92" width="196" height="10" fill="#ffc928"/>
+        <rect x="20" y="30" width="44" height="10" rx="4" fill="#e53935"/>
+        <path d="M0 112 L-40 40 M-40 40 L-52 66" stroke="#0b2a5b" stroke-width="7" stroke-linecap="round"/>
+        <circle cx="40" cy="128" r="20" fill="#0b2a5b"/><circle cx="40" cy="128" r="8" fill="#d7dee8"/>
+        <circle cx="160" cy="128" r="20" fill="#0b2a5b"/><circle cx="160" cy="128" r="8" fill="#d7dee8"/>
+        <text x="55" y="75" text-anchor="middle" font-family="Poppins,Arial" font-weight="800" font-style="italic" font-size="15" fill="#0b2a5b">JANSSEN</text>
+      </g>
+      <g fill="#ffc928"><circle cx="350" cy="60" r="6"/><circle cx="372" cy="84" r="4"/></g>
+    </svg>
