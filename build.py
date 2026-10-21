@@ -213,7 +213,7 @@ def page(*, title, desc, path, body, schema, crumbs=None):
         <p>Sleepdienst, pechhulp en autotransport in {REGION}. 24 uur per dag, 7 dagen per week.</p>
       </div>
       <div><h4>Werkgebied</h4><ul>{city_links}</ul></div>
-      <div><h4>Diensten</h4><ul><li><a href="/#diensten">Pechhulp</a></li><li><a href="/#diensten">Auto slepen</a></li><li><a href="/#diensten">Autotransport</a></li><li><a href="/#diensten">Bandenservice</a></li><li><a href="/#faq">Veelgestelde vragen</a></li></ul></div>
+      <div><h4>Diensten</h4><ul><li><a href="/#diensten">Pechhulp</a></li><li><a href="/#diensten">Auto slepen</a></li><li><a href="/#diensten">Autotransport</a></li><li><a href="/#diensten">Bandenservice</a></li><li><a href="/#faq">Veelgestelde vragen</a></li><li><a href="/pech-op-de-snelweg/">Pech op de snelweg</a></li></ul></div>
       <div><h4>Contact</h4><ul>
         <li>Tel: <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a> (24/7)</li>
         <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
@@ -462,6 +462,7 @@ def city_page(c):
       <ul class="roads">{roads}</ul>
       <h3>Pech op een lastige plek</h3>
       <p>{escape(c["spots"])}</p>
+      <p>Wat u precies moet doen als u stilvalt, leest u in onze gids <a href="/pech-op-de-snelweg/">pech op de snelweg</a>.</p>
       <h3>Wat wij doen in {n}</h3>
       <ul class="checks">
         <li>Auto slepen na pech of een ongeval</li>
@@ -510,6 +511,133 @@ def city_page(c):
     return page(title=f"Sleepdienst {c['name']} 24/7 | {NAME}",
                 desc=f"Sleepdienst in {c['name']} nodig? {NAME} helpt 24/7 met pechhulp, slepen en autotransport in {c['name']} en omgeving. Vooraf een vaste prijs. Bel {PHONE_DISPLAY}.",
                 path=path, body=body, schema=schema, crumbs=[f"Sleepdienst {c['name']}"])
+
+
+# ===== Gidsen =====
+SNELWEG_FAQ = [
+    ("Wie moet ik bellen bij pech op de snelweg?", "Staat u op een gevaarlijke plek of is er iemand gewond? Bel altijd eerst 112. Staat u veilig, dan belt u uw pechhulp of een sleepdienst zoals " + NAME + ". Wij komen ook als u geen lid bent van een pechhulpdienst."),
+    ("Heb ik een pechhulp-abonnement nodig om geholpen te worden?", "Nee. U kunt ons altijd bellen, ook zonder lidmaatschap of verzekering. U betaalt dan per keer en hoort vooraf wat het kost."),
+    ("Moet ik een gevarendriehoek plaatsen op de snelweg?", "Op de snelweg wordt het plaatsen van een gevarendriehoek afgeraden: lopen langs rijdend verkeer is te gevaarlijk. Zet uw alarmlichten aan en ga zelf achter de vangrail staan."),
+    ("Mag ik in de auto blijven zitten?", "Alleen als uitstappen niet veilig kan, bijvoorbeeld als er geen vluchtstrook is. Blijf dan zitten met de gordel om en de alarmlichten aan, en bel 112. Kunt u wel veilig uitstappen, doe dat dan aan de kant van de berm."),
+    ("Wat kost slepen vanaf de snelweg?", "Dat hangt af van de plek, de afstand en het tijdstip. Bij " + NAME + " hoort u de prijs vooraf aan de telefoon, voordat er iemand naar u toe komt."),
+    ("Wat als de weginspecteur of politie al een berger heeft gebeld?", "Blokkeert uw auto de weg, dan kan de weginspecteur of de politie een berger inschakelen om de rijbaan snel vrij te maken. Die gaat dan voor. Daarna kunnen wij uw auto ophalen en naar uw garage of huis brengen."),
+]
+
+
+def guide_snelweg():
+    path = "/pech-op-de-snelweg/"
+    steps = [
+        ("Alarmlichten aan", "Zet direct uw alarmlichten aan, ook overdag. Zo ziet ander verkeer meteen dat er iets aan de hand is."),
+        ("Zo ver mogelijk naar rechts", "Rol als het kan door naar de vluchtstrook, een pechhaven of de eerstvolgende afrit. Zet de auto zo ver mogelijk rechts en draai de wielen naar de berm."),
+        ("Veiligheidshesje aan", "Trek uw hesje aan vóór u uitstapt. Een hesje is in Nederland niet verplicht, maar op de snelweg maakt het het verschil in zichtbaarheid."),
+        ("Uitstappen aan de berm-kant", "Stap uit aan de rechterkant, weg van het verkeer. Laat passagiers ook aan die kant uitstappen."),
+        ("Achter de vangrail", "Ga met iedereen achter de vangrail of zo ver mogelijk in de berm staan, ruim achter de auto. Nooit tussen de auto en het verkeer."),
+        ("Bellen", "Bel 112 bij gevaar of letsel. Staat u veilig, bel dan uw pechhulp of een sleepdienst. Geef uw locatie door: de weg, de rijrichting en het hectometerpaaltje."),
+    ]
+    steps_html = "".join(f"<li><b>{escape(a)}</b> {escape(b)}</li>" for a, b in steps)
+    city_links = ", ".join(f'<a href="{url(c["slug"])}">{escape(c["name"])}</a>' for c in CITIES)
+    body = f"""<section class="hero hero-city">
+  <div class="container hero-grid">
+    <div>
+      <h1>Pech op de <span>snelweg</span>: wat moet u doen?</h1>
+      <p>Uw auto valt stil op de A15, de A16 of de ring van Rotterdam. Wat nu? In deze gids leest u stap voor stap hoe u veilig blijft, wie u belt en hoe u snel weer verder kunt – ook zonder pechhulp-abonnement.</p>
+      <div class="actions">
+        <a class="btn btn-yellow" href="tel:{PHONE_TEL}"><svg class="ico"><use href="#i-phone"/></svg>Nu pech? Bel {PHONE_DISPLAY}</a>
+        <a class="btn btn-navy" href="#stappen">Direct naar de stappen</a>
+      </div>
+      <div class="trust">
+        <span><svg><use href="#i-clock"/></svg>24/7 bereikbaar</span>
+        <span><svg><use href="#i-euro"/></svg>Geen lidmaatschap nodig</span>
+      </div>
+    </div>
+    <div class="hero-art">{svg("art-driver")}</div>
+  </div>
+  <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70 C 240 130, 480 10, 760 50 S 1220 120, 1440 30 L1440 120 L0 120Z" fill="#fff"/></svg>
+</section>
+<section class="section city-body">
+  <div class="container city-grid">
+    <article class="prose">
+      <h2 id="stappen">Pech op de snelweg in 6 stappen</h2>
+      <ol class="checks">{steps_html}</ol>
+      <p>Is iemand gewond, staat u op een plek zonder vluchtstrook of loopt er brandstof of rook uit de auto? Bel dan meteen <strong>112</strong>.</p>
+
+      <h2>Waar staat u precies? Zo geeft u uw locatie door</h2>
+      <p>De meeste tijd gaat verloren aan het zoeken naar de auto. Dit helpt de hulpverlener om u direct te vinden:</p>
+      <ul class="checks">
+        <li><b>Het wegnummer</b>, bijvoorbeeld A16.</li>
+        <li><b>De rijrichting</b>: richting welke stad reed u?</li>
+        <li><b>Het hectometerpaaltje</b>: de groene bordjes langs de weg met een getal en een letter (zoals 34,2 Re). Dat is uw exacte positie.</li>
+        <li><b>De laatste afrit of het laatste knooppunt</b> dat u heeft gezien.</li>
+      </ul>
+      <p>Stuur ons uw locatie via WhatsApp, dan zien we direct waar u staat.</p>
+
+      <h2>Pech zonder vluchtstrook, op een spitsstrook of in een tunnel</h2>
+      <h3>Geen vluchtstrook</h3>
+      <p>Op veel snelwegen rond Rotterdam en de Drechtsteden wordt de vluchtstrook in de spits als extra rijstrook gebruikt. Valt u daar stil, probeer dan een pechhaven te halen: die liggen regelmatig langs zulke trajecten. Lukt dat niet, blijf dan met de gordel om in de auto zitten, alarmlichten aan, en bel 112. De verkeerscentrale kan de rijstrook dan afsluiten met een rood kruis boven de weg.</p>
+      <h3>In een tunnel</h3>
+      <p>In de Maastunnel, de Beneluxtunnel of de Drechttunnel geldt: alarmlichten aan, motor uit, sleutel in het contact laten zitten. Gebruik de hulppost of noodtelefoon in de tunnel en volg de aanwijzingen van de verkeerscentrale. Moet u de tunnel uit, loop dan naar de groene vluchtdeuren.</p>
+      <h3>Op een brug</h3>
+      <p>Op de Van Brienenoordbrug of de Moerdijkbruggen is weinig ruimte. Blijf zo dicht mogelijk bij de rechterkant en kom niet op de rijbaan. Kan uitstappen niet veilig, blijf dan zitten en bel 112.</p>
+
+      <h2>Wat u beter niet doet</h2>
+      <ul class="checks">
+        <li><b>Geen gevarendriehoek plaatsen</b> op de snelweg. Teruglopen langs rijdend verkeer is te gevaarlijk.</li>
+        <li><b>Niet zelf sleutelen</b> aan de verkeerskant van de auto. Ook een band wisselen op de vluchtstrook is riskant.</li>
+        <li><b>Niet oversteken</b> naar de andere kant van de weg.</li>
+        <li><b>Niet laten wegslepen met een touw</b> op de snelweg: dat mag niet.</li>
+      </ul>
+
+      <h2>Pech onderweg zonder lidmaatschap</h2>
+      <p>Veel mensen denken dat ze alleen geholpen worden als ze lid zijn van een pechhulpdienst. Dat klopt niet. Bij {NAME} kunt u altijd bellen, ook zonder abonnement of verzekering. U betaalt per keer en u hoort de prijs vooraf, voordat er iemand naar u toe rijdt.</p>
+      <p>Wij helpen met starthulp, een lege accu of een lekke band waar het veilig kan, en slepen uw auto anders naar uw garage, naar huis of naar een veilige plek.</p>
+
+      <h2>Wanneer schakelt de weginspecteur een berger in?</h2>
+      <p>Blokkeert uw auto een rijstrook of is er een ongeval gebeurd, dan kan de weginspecteur van Rijkswaterstaat of de politie een berger inschakelen. Het doel is de weg zo snel mogelijk vrij te maken. In dat geval wordt uw auto eerst naar een veilige plek gebracht. Daarna kunnen wij het voertuig ophalen en verder vervoeren naar uw garage of huis.</p>
+
+      <h2>Na de pech: uw auto ophalen en wegbrengen</h2>
+      <p>Wij werken in {REGION}: {city_links}. Staat uw auto na een berging op een terrein, of wilt u hem van de vluchtstrook naar uw eigen garage laten brengen? Bel ons, dan regelen we het vervoer op een plateauwagen – ook voor elektrische auto's.</p>
+    </article>
+    <aside class="side">
+      <div class="side-card">
+        <h3>Nu pech op de snelweg?</h3>
+        <p>Staat u veilig achter de vangrail? Bel ons, ook zonder lidmaatschap.</p>
+        <a class="btn btn-yellow" href="tel:{PHONE_TEL}"><svg class="ico"><use href="#i-phone"/></svg>{PHONE_DISPLAY}</a>
+      </div>
+      <div class="side-card">
+        <h3>In het kort</h3>
+        <ul class="checks">
+          <li>Alarmlichten aan</li>
+          <li>Hesje aan, uitstappen aan de berm-kant</li>
+          <li>Achter de vangrail</li>
+          <li>Bij gevaar: 112</li>
+          <li>Geen gevarendriehoek op de snelweg</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</section>
+<section class="section" id="faq">
+  <div class="container">
+    <h2 class="title center">Vragen over pech op de snelweg</h2>
+    <div class="faq narrow">{faq_html(SNELWEG_FAQ)}</div>
+  </div>
+</section>"""
+    import re as _re
+    body = _re.sub(r"<li>(<b>.*?)</li>", r"<li><span>\1</span></li>", body)
+    schema = {"@context": "https://schema.org", "@graph": [
+        {"@type": "Article", "headline": "Pech op de snelweg: wat moet u doen?", "inLanguage": "nl-NL",
+         "author": {"@type": "Organization", "name": NAME}, "publisher": {"@id": SITE + "/#business"},
+         "mainEntityOfPage": SITE + path, "dateModified": date.today().isoformat()},
+        {"@type": "HowTo", "name": "Wat te doen bij pech op de snelweg",
+         "step": [{"@type": "HowToStep", "position": i + 1, "name": a, "text": b} for i, (a, b) in enumerate(steps)]},
+        faq_schema(SNELWEG_FAQ),
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE + "/"},
+            {"@type": "ListItem", "position": 2, "name": "Pech op de snelweg", "item": SITE + path}]},
+    ]}
+    return page(title=f"Pech op de snelweg? Wat te doen en wie bellen | {NAME}",
+                desc=f"Pech op de snelweg? Zo blijft u veilig: alarmlichten, hesje, achter de vangrail. Wie u belt en hoe u hulp krijgt zonder lidmaatschap. 24/7: {PHONE_DISPLAY}.",
+                path=path, body=body, schema=schema, crumbs=["Pech op de snelweg"])
 
 
 def privacy():
@@ -561,11 +689,12 @@ def main():
     write("index.html", home())
     for c in CITIES:
         write(f"sleepdienst-{c['slug']}/index.html", city_page(c))
+    write("pech-op-de-snelweg/index.html", guide_snelweg())
     write("privacy/index.html", privacy())
     for old, new in REDIRECTS.items():
         write(f"{old}/index.html", redirect(new))
     today = date.today().isoformat()
-    urls = ["/"] + [url(c["slug"]) for c in CITIES] + ["/privacy/"]
+    urls = ["/"] + [url(c["slug"]) for c in CITIES] + ["/pech-op-de-snelweg/", "/privacy/"]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
           + "".join(f"  <url><loc>{SITE}{u}</loc><lastmod>{today}</lastmod></url>\n" for u in urls) + "</urlset>\n")
     write("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n")
