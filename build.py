@@ -12,9 +12,9 @@ from pathlib import Path
 # ===== Bedrijfsgegevens — hier één keer aanpassen =====
 NAME = "Sleepdienst Janssen"
 SITE = "https://sleepdienstjanssen.nl"
-PHONE_DISPLAY = "085 000 00 00"   # TODO: echt nummer
-PHONE_TEL = "+31850000000"        # TODO: echt nummer, internationaal formaat
-WHATSAPP = "31850000000"          # TODO: nummer zonder + voor wa.me
+PHONE_DISPLAY = "0970 1022 9095"
+PHONE_TEL = "+3197010229095"
+WHATSAPP = "3197010229095"
 EMAIL = "info@sleepdienstjanssen.nl"
 REGION = "Rotterdam, Drechtsteden, Brabant & Zeeland"
 
